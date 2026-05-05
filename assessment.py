@@ -12,8 +12,13 @@ st.caption("Gemini AI を使用した多職種評価の構造的差異分析")
 with st.sidebar:
     st.header("🔑 API設定")
     # --- 設定 ---
+   api_key = None
+    
+    # 2. secretsにキーがあれば、それを変数に代入する
     if "GOOGLE_API_KEY" in st.secrets:
-        genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+        api_key = st.secrets["GOOGLE_API_KEY"]
+        genai.configure(api_key=api_key)
+        st.success("APIキーを読み込みました")
     else:
         st.error("GOOGLE_API_KEYが見つかりません。")
     
