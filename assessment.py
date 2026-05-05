@@ -11,7 +11,11 @@ st.caption("Gemini AI を使用した多職種評価の構造的差異分析")
 # --- サイドバー：API設定とモデル選択 ---
 with st.sidebar:
     st.header("🔑 API設定")
-    api_key = st.text_input("Gemini API Key", type="password")
+    # --- 設定 ---
+    if "GOOGLE_API_KEY" in st.secrets:
+        genai.configure(api_key=st.secrets["GOOGLE_API_KEY"])
+    else:
+        st.error("GOOGLE_API_KEYが見つかりません。")
     
     # モデルの指定（最新のFlashモデルを推奨）
     selected_model = st.selected_model = "gemini-3-flash-preview"
